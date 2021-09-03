@@ -1,0 +1,36 @@
+<form method="POST" action="inscrivez.php">
+    <table>
+        <tr>
+            <td>Login: <input type="text" name="txt_login" id="id_login"></td>
+            <td>password: <input type="password" name="txt_password" id="id_password"></td>
+            <td>repeat password: <input type="password" name="txt_password2" id="id_password2" onchange="CheckPassword()">
+            </td>
+            <td>
+                <input class="btn" type="submit" value="Inscrivez" disabled>
+            </td>
+        </tr>
+    </table>
+</form>
+<script src="jquery.min.js"></script>
+<script>
+ function CheckPassword(){
+     //document.getElementById('id_password').value;
+     var password=$('#id_password').val();
+     var password2=$('#id_password2').val();
+     if(password!=password2){
+        $('#id_password').val('');
+        $('#id_password2').val('');
+        $('#id_password2').attr('style','border:solid 1px red');
+        $('form').after('<p style="color:red"> verifier mot de passe 2</p>');
+     }
+     if(password.length<=8){
+        $('#id_password2').attr('style','border:solid 1px red');
+        $('form').after('<p style="color:red">Min 8 car.</p>');
+     }
+     if(password==password2 && password.length>=8){
+         console.log('ok');
+         $(".btn").prop('disabled',false);
+     }
+
+ }
+</script>
