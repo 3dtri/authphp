@@ -43,7 +43,7 @@ echo $_REQUEST['msg'];
 
 </div>
 
-    <form method="post" action="ajout.php">
+    <form method="post" action="ajout.php" enctype='multipart/form-data' >
 <input type="hidden" name="idp" value="<?php if(isset($_REQUEST['id'])) echo $_REQUEST['id'] ?>">
     <table>
 <tr>
@@ -58,7 +58,12 @@ echo $_REQUEST['msg'];
 </tr>
 <tr>
 <td>Tel</td>
-<td><input type="text" value="<?php echo $tel  ?>" name="txt_tel">
+<td><input type="text" value="<?php echo $tel  ?>" name="txt_tel"></td>
+
+</tr>
+<tr>
+<td>Photo</td>
+<td><input type="file"  name="photo"></td>
 
 </tr>
 <tr>
@@ -97,11 +102,18 @@ $host='localhost';
 $user='root';
 $password='';
 $db=mysqli_connect($host,$user,$password);
-mysqli_select_db($db,'exemple2');
-$req="SELECT `nom`, `prenom`, `tel` FROM `personne";
+mysqli_select_db($db,'exemple3');
+$req="SELECT `nom`, `prenom`, `tel`,photo FROM `personne";
+
 $result=mysqli_query($db,$req);
 while($row=mysqli_fetch_assoc($result)){
+?>
+<tr>
+<td><img src="<?php echo 'images/'.$row['photo']  ?>"></td>
 
+</tr>
+
+<?php
 }
 ?>
 
